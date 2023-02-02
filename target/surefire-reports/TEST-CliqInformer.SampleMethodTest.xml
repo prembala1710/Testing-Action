@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="CliqInformer.SampleMethodTest" time="0.003" errors="0" skipped="0">
+<testsuite tests="1" failures="0" name="CliqInformer.SampleMethodTest" time="0.004" errors="0" skipped="0">
   <properties>
     <property name="jansi.mode" value="force"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
@@ -24,7 +24,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="stderr.encoding" value="UTF-8"/>
     <property name="os.name" value="Linux"/>
-    <property name="classworlds.conf" value="/home/prem-pt6970/eclipse-workspace/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf1975273556378830872.tmp"/>
+    <property name="classworlds.conf" value="/home/prem-pt6970/eclipse-workspace/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf17784502591196668258.tmp"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="stdout.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
@@ -57,7 +57,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="java.vendor.version" value="Temurin-19.0.1+10"/>
-    <property name="m2e.build.project.data.socket.port" value="46413"/>
+    <property name="m2e.build.project.data.socket.port" value="35679"/>
   </properties>
-  <testcase classname="CliqInformer.SampleMethodTest" name="test" time="0.003"/>
+  <testcase classname="CliqInformer.SampleMethodTest" name="test" time="0.004"/>
 </testsuite>
