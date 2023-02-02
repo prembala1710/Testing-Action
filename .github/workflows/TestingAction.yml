@@ -1,0 +1,56 @@
+name : Github Action First Attempt
+
+on: 
+  registry_package:
+    
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    environment: CliqInformer
+    steps:
+      - name: Set Up Checkout
+        uses: actions/checkout@v1
+      - name: Set Up JDK 19
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'temurin'
+      - name: Set Up CliqInformer
+        uses: prembala1710/CliqInformer@v0.0.11
+        with:
+          cliq-webhook: ${{ secrets.CliqToken }}
+          channel-endpoint: 'cliqinformertestingchannel'
+          branch-protection-rule-message: '(workflow) is triggered by branch protection rule (event) (action) by (me) at (repo) under (ref)'
+          check-run-message: '(workflow) is triggered by check-run (event) (action) by (me) at (repo) under (ref)'
+          check-suite-message: '(workflow) is triggered by check-suite (event) (action) by (me) at (repo) under (ref)'
+          create-message: '(workflow) is triggered by create (event) (action) by (me) at (repo) under (ref)'
+          delete-message: '(workflow) is triggered by delete (event) (action) by (me) at (repo) under (ref)'
+          deployment-message: '(workflow) is triggered by deployment (event) (action) by (me) at (repo) under (ref)'
+          deployment-status-message: '(workflow) is triggered by deployment_status (event) (action) by (me) at (repo) under (ref)'
+          discussion-message: '(workflow) is triggered by discussion (event) (action) by (me) at (repo) under (ref)'
+          discussion-comment-message: '(workflow) is triggered by discussion-comment (event) (action) by (me) at (repo) under (ref)'
+          fork-message: '(workflow) is triggered by fork (event) (action) by (me) at (repo) under (ref)'
+          gollum-message: '(workflow) is triggered by gollum (event) (action) by (me) at (repo) under (ref)'
+          issues-message: '(workflow) is triggered by issue (event) (action) by (me) at (repo) under (ref)'
+          issue-comment-message: '(workflow) is triggered by issue_comment (event) (action) by (me) at (repo) under (ref)'
+          label-message: '(workflow) is triggered by label (event) (action) by (me) at (repo) under (ref)'
+          merge-group-message: '(workflow) is triggered by merge_group (event) (action) by (me) at (repo) under (ref)'
+          milestone-message: '(workflow) is triggered by milestone (event) (action) by (me) at (repo) under (ref)'
+          page-build-message: '(workflow) is triggered by page_build (event) (action) by (me) at (repo) under (ref)'
+          project-message: '(workflow) is triggered by project (event) (action) by (me) at (repo) under (ref)'
+          project-card-message: '(workflow) is triggered by project_card (event) (action) by (me) at (repo) under (ref)'
+          project-column-message: '(workflow) is triggered by project_column (event) (action) by (me) at (repo) under (ref)'
+          public-message: '(workflow) is triggered by public (event) (action) by (me) at (repo) under (ref)'
+          pull-request-message: '(workflow) is triggered by pull_request (event) (action) by (me) at (repo) under (ref)'
+          pull-request-comment-message: '(workflow) is triggered by pull_request_comment (event) (action) by (me) at (repo) under (ref)'
+          pull-request-target-message: '(workflow) is triggered by pull_request_target (event) (action) by (me) at (repo) under (ref)'
+          pull-request-review-message: '(workflow) is triggered by pull_request_review (event) (action) by (me) at (repo) under (ref)'
+          pull-request-review-comment-message: '(workflow) is triggered by pull_request_review_comment (event) (action) by (me) at (repo) under (ref)'
+          push-message: '(workflow) is triggered by push (event) (action) by (me) at (repo) under (ref)'
+          registry-package-message: '(workflow) is triggered by registry_package (event) (action) by (me) at (repo) under (ref)'
+          release-message: '(workflow) is triggered by release (event) (action) by (me) at (repo) under (ref)'
+          repository-dispatch-message: '(workflow) is triggered by repository_dispatch (event) (action) by (me) at (repo) under (ref)'
+          schedule-message: '(workflow) is triggered by schedule (event) (action) by (me) at (repo) under (ref)'
+          status-message: '(workflow) is triggered by status (event) (action) by (me) at (repo) under (ref)'
+          watch-message: '(workflow) is triggered by push (event) (action) by (me) at (repo) under (ref)'
+          workflow-dispatch-message: '(workflow) is triggered by workflow_dispatch (event) (action) by (me) at (repo) under (ref)'
