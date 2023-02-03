@@ -2,6 +2,7 @@ name : Github Action First Attempt
 
 on: 
   registry_package:
+    types: [published]
     
 jobs:
   build_and_test:
