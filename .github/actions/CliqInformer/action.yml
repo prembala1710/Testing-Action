@@ -1,0 +1,251 @@
+name: "CliqInformer"
+description: "The Github Action integrates Github and Zoho Cliq by notifying about the Github Events Performed to the Cliq Channels."
+
+branding:
+  icon: 'message-square'
+  color: 'blue'
+
+inputs:
+  cliq-webhook:
+    description: "Webhook to Integrate with your Zoho Account in Cliq"
+    required: true
+  channel-endpoint:
+    description: "Endpoint of the Channel you would like to Integrate with in Cliq"
+    required: true
+  branch-protection-rule-message:
+    description: "The Message to be Delivered to the Cliq Channel during a branch protection rule event"
+  check-run-message:
+    description: "The Message to be Delivered to the Cliq Channel during a check run event"
+  check-suite-message:
+    description: "The Message to be Delivered to the Cliq Channel during a check suite event"
+  create-message:
+    description: "The Message to be Delivered to the Cliq Channel during a create event"
+  delete-message:
+    description: "The Message to be Delivered to the Cliq Channel during a delete event"
+  deployment-message:
+    description: "The Message to be Delivered to the Cliq Channel during a deployment event"
+  deployment-status-message:
+    description: "The Message to be Delivered to the Cliq Channel during a deployment status event"
+  discussion-message:
+    description: "The Message to be Delivered to the Cliq Channel during a discussion event"
+  discussion-comment-message:
+    description: "The Message to be Delivered to the Cliq Channel during a discussion comment event"
+  fork-message:
+    description: "The Message to be Delivered to the Cliq Channel during a fork event"
+  gollum-message:
+    description: "The Message to be Delivered to the Cliq Channel during a gollum event"
+  issue-comment-message:
+    description: "The Message to be Delivered to the Cliq Channel during a issue comment event"
+  issues-message:
+    description: "The Message to be Delivered to the Cliq Channel during a issues event"
+  label-message:
+    description: "The Message to be Delivered to the Cliq Channel during a label event"
+  merge-group-message:
+    description: "The Message to be Delivered to the Cliq Channel during a merge group event"
+  milestone-message:
+    description: "The Message to be Delivered to the Cliq Channel during a milestone event"
+  page-build-message:
+    description: "The Message to be Delivered to the Cliq Channel during a page build event"
+  project-message:
+    description: "The Message to be Delivered to the Cliq Channel during a project event"
+  project-card-message:
+    description: "The Message to be Delivered to the Cliq Channel during a project card event"
+  project-column-message:
+    description: "The Message to be Delivered to the Cliq Channel during a project column event"
+  public-message:
+    description: "The Message to be Delivered to the Cliq Channel during a public event"
+  pull-request-message:
+    description: "The Message to be Delivered to the Cliq Channel during a pull request event"
+  pull-request-comment-message:
+    description: "The Message to be Delivered to the Cliq Channel during a pull request comment event"
+  pull-request-review-message:
+    description: "The Message to be Delivered to the Cliq Channel during a pull request review event"
+  pull-request-review-comment-message:
+    description: "The Message to be Delivered to the Cliq Channel during a pull request review comment event"
+  pull-request-target-message:
+    description: "The Message to be Delivered to the Cliq Channel during a pull request target event"
+  push-message:
+    description: "The Message to be Delivered to the Cliq Channel during a push event"
+  registry-package-message:
+    description: "The Message to be Delivered to the Cliq Channel during a registry package event"
+  release-message:
+    description: "The Message to be Delivered to the Cliq Channel during a release event"
+  repository-dispatch-message:
+    description: "The Message to be Delivered to the Cliq Channel during a repository dispatch event"
+  schedule-message:
+    description: "The Message to be Delivered to the Cliq Channel during a schedule event"
+  status-message:
+    description: "The Message to be Delivered to the Cliq Channel during a status event"
+  watch-message:
+    description: "The Message to be Delivered to the Cliq Channel during a watch event"
+  workflow-call-message:
+    description: "The Message to be Delivered to the Cliq Channel during a workflow call event"
+  workflow-dispatch-message:
+    description: "The Message to be Delivered to the Cliq Channel during a workflow dispatch event"
+  workflow-run-message:
+    description: "The Message to be Delivered to the Cliq Channel during a workflow run event"
+  default-message:
+    description: "The Message that is customized to be sent to the Cliq Channel when an action other than specified Occurs"
+  non-specific-message:
+    description: "Specify the Message if not Specified in Workflow  default for CliqInformer Generated Message or custom for Developer Specified Custom Message in default-message or none for No Message to be Sent"
+    default: 'default'
+      
+  
+outputs:
+  message-status:
+    description: "The Status of Reception of the Message in the Zoho Cliq Application"
+    value: ${{ steps.send-message.outputs.message-status }}
+
+runs:
+  using: "composite"
+  steps:
+      - name: Set Up JDK 19
+        id: setup-jdk
+        uses: actions/setup-java@v3
+        with:
+          java-version: '19'
+          distribution: 'temurin'
+      - name: Set Up Checkout
+        id: setup-checkout
+        uses: actions/checkout@v3
+      - name: Setting Message Content
+        id: action-finder
+        shell: bash
+        run: |
+          if ${{ github.event_name == 'branch_protection_rule' }}
+          then
+            echo "message=${{inputs.branch-protection-rule-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'check_run' }}
+          then
+            echo "message=${{inputs.check-run-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'check_suite' }}
+          then
+            echo "message=${{inputs.check-suite-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'create' }}
+          then
+            echo "message=${{inputs.create-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'delete' }}
+          then
+            echo "message=${{inputs.delete-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'deployment' }}
+          then
+            echo "message=${{inputs.deployment-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'deployment_status' }}
+          then
+            echo "message=${{inputs.deployment-status-message}}" >> $GITHUB_ENV
+          elif ${{github.event_name == 'discussion' }}
+          then
+            echo "message=${{inputs.discussion-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'discussion_comment' }}
+          then
+            echo "message=${{inputs.discussion-comment-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'fork' }}
+          then
+            echo "message=${{inputs.fork-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'gollum' }}
+          then
+            echo "message=${{inputs.gollum-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'issue_comment' && !github.event.issue.pull_request }}
+          then
+            echo "message=${{inputs.issue-comment-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'issue_comment' }}
+          then
+            MESSAGE='${{inputs.pull-request-comment-message}}'
+            echo "message=$MESSAGE" >> $GITHUB_ENV
+            MESSAGE=${MESSAGE//(event)/"pull request comment"}
+            echo "message=$MESSAGE" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'issues' }}
+          then
+            echo "message=${{inputs.issues-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'label' }}
+          then
+            echo "message=${{inputs.label-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'merge_group' }}
+          then
+            echo "message=${{inputs.merge-group-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'milestone' }}
+          then
+            echo "message=${{inputs.milestone-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'page_build' }}
+          then
+            echo "message=${{inputs.page-build-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'project' }}
+          then
+            echo "message=${{inputs.project-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'project_card' }}
+          then
+            echo "message=${{inputs.project-card-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'project_column' }}
+          then
+            echo "message=${{inputs.project-column-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'public' }}
+          then
+            echo "message=${{inputs.public-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'pull_request' }}
+          then
+            echo "message=${{inputs.pull-request-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'pull_request_review' }}
+          then
+            echo "message=${{inputs.pull-request-review-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'pull_request_review_comment' }}
+          then
+            echo "message=${{inputs.pull-request-review-comment-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'pull_request_target' }}
+          then
+            echo "message=${{inputs.pull-request-target-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'push' }}
+          then
+            echo "message=${{inputs.push-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'registry_package' }}
+          then
+            echo "message=${{inputs.registry-package-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'release' }}
+          then
+            echo "message=${{inputs.release-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'repository_dispatch' }}
+          then
+            echo "message=${{inputs.repository-dispatch-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'schedule' }}
+          then
+            echo "message=${{inputs.schedule-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'status' }}
+          then
+            echo "message=${{inputs.status-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'watch' }}
+          then
+            echo "message=${{inputs.watch-message}}" >> $GITHUB_ENV
+          elif ${{ github.event_name == 'workflow_dispatch' }}
+          then
+            echo "message=${{inputs.workflow-dispatch-message}}" >> $GITHUB_ENV
+          fi
+      - name: "Setting Message"
+        shell: bash
+        id: action-undefined
+        run: |
+          if ${{ env.message == '' && inputs.default-message != '' }}
+          then
+            echo "message=${{inputs.default-message}}" >> $GITHUB_ENV
+          elif ${{ env.message == '' }}
+          then
+             echo "message=The Workflow (workflow) is triggered by a (event) (action) by (me) at Repository (repo) under Branch/Tag (ref)" >> $GITHUB_ENV
+          fi
+      - name: "Running the Cliq Integration"
+        id: send-message
+        shell: bash
+        run: |
+          JAVA=$JAVA_HOME_19_X64/bin/java
+          CONNECTOR=$GITHUB_ACTION_PATH/src/CliqInformer.java
+          if ${{ env.message != '' }}
+          then
+            $JAVA $CONNECTOR ${{inputs.cliq-webhook}} ${{inputs.channel-endpoint}} "$GITHUB_EVENT_NAME" "${{ github.event.action }}" "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_WORKFLOW" "$GITHUB_ACTOR" "$GITHUB_RUN_ID" "$GITHUB_REF" "${{env.message}}"
+          fi
+      - name: "Displaying Output"
+        id: display-output
+        shell: bash
+        run: |
+          if ${{ steps.send-message.outputs.message-status == '204' }} 
+          then 
+            echo "Message sent to Cliq"
+          else
+            echo "Message Not Found"
+          fi
