@@ -16,7 +16,7 @@ jobs:
           java-version: 19
           distribution: 'temurin'
       - name: Set Up CliqInformer
-        uses: ./.github/actions/CliqInformer
+        uses: .github/actions/CliqInformer
         with:
           cliq-webhook: ${{ secrets.CliqToken }}
           channel-endpoint: 'cliqinformertestingchannel'
