@@ -151,8 +151,7 @@ runs:
           elif ${{ github.event_name == 'issue_comment' }}
           then
             MESSAGE='${{inputs.pull-request-comment-message}}'
-            echo "message=$MESSAGE" >> $GITHUB_ENV
-            MESSAGE=${MESSAGE//(event)/"pull request comment"}
+            MESSAGE=${MESSAGE//(event)/"Pull Request Comment"}
             echo "message=$MESSAGE" >> $GITHUB_ENV
           elif ${{ github.event_name == 'issues' }}
           then
