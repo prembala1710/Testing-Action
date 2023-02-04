@@ -19,7 +19,7 @@ public class CliqInformer {
 	public static void main(String args[]) {
 		System.out.println("Calling Cliq...");
 		HttpURLConnection connection;
-		Integer MAX_MESSAGE_LENGTH = 4095;
+		Integer MAX_MESSAGE_LENGTH = 4000;
 		Integer status = 400;
 		StringBuffer responseContent = new StringBuffer();
 		try {
@@ -113,6 +113,7 @@ public class CliqInformer {
 				  }
 				  reader.close();
 			  }
+			  System.out.println(responseContent);
 			}
 			var githubOutput = System.getenv("GITHUB_OUTPUT");
 			if(status == 204)
