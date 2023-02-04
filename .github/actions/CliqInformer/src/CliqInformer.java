@@ -19,6 +19,7 @@ public class CliqInformer {
 	public static void main(String args[]) {
 		System.out.println("Calling Cliq...");
 		HttpURLConnection connection;
+		Integer MAX_MESSAGE_LENGTH = 2878;
 		StringBuffer responseContent = new StringBuffer();
 		try {
       boolean error = false;
@@ -72,32 +73,45 @@ public class CliqInformer {
 			message = message.replace("(event)",Event);
 			message = message.replace("(action)",Action);
 			message = message.replace("(ref)","[" + Ref + "](" + RefURL + ")" );
-			String TextParams = "{\n\"text\":\"" + message + "\",\n\"bot\":\n{\n\"name\":\"CliqInformer\",\n\"image\":\"" + CliqInformerURL + "\"\n}}\n";
-			connection = (HttpURLConnection) new URL(CliqChannelLink + "?zapikey=" + CliqWebhookToken).openConnection();
-			connection.setRequestMethod("POST");
-			connection.setRequestProperty("Content-Type","application/json");
-			connection.setDoOutput(true);
-			OutputStream os = connection.getOutputStream();
-			os.write(TextParams.getBytes());
-			os.flush();
-			os.close();
-			int status = connection.getResponseCode();
-			if(status > 299) {
-				BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
-				String line;
-				while((line = reader.readLine()) != null) {
-					responseContent.append(line);
-				}
-			  reader.close();
-			}
-			else
+			ArrayList<String> messages = new ArrayList<String>();
+			for(i = 0 ; i < message.length ; i+= MAX_MESSAGE_LENGTH)
 			{
-				BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-				String line;
-				while((line = reader.readLine()) != null) {
-					responseContent.append(line);
-				}
-				reader.close();
+			  String split_message;
+			  if(i+MAX_MESSAGE_LENGTH < message.length())
+			    split_message = message.substring(i,i+MAX_MESSAGE_LENGTH);
+			  else
+			    split_message = message.substring(i,message.length());
+			    messages.add(split_message);
+			}
+			for(String msg : messages)
+			{
+			  String TextParams = "{\n\"text\":\"" + message + "\",\n\"bot\":\n{\n\"name\":\"CliqInformer\",\n\"image\":\"" + CliqInformerURL + "\"\n}}\n";
+			  connection = (HttpURLConnection) new URL(CliqChannelLink + "?zapikey=" + CliqWebhookToken).openConnection();
+			  connection.setRequestMethod("POST");
+			  connection.setRequestProperty("Content-Type","application/json");
+			  connection.setDoOutput(true);
+			  OutputStream os = connection.getOutputStream();
+			  os.write(TextParams.getBytes());
+			  os.flush();
+			  os.close();
+			  int status = connection.getResponseCode();
+			  if(status > 299) {
+				  BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
+				  String line;
+				  while((line = reader.readLine()) != null) {
+					  responseContent.append(line);
+				  }
+			    reader.close();
+			  }
+			  else
+			  {
+				  BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+				  String line;
+				  while((line = reader.readLine()) != null) {
+					  responseContent.append(line);
+				  }
+				  reader.close();
+			  }
 			}
 			var githubOutput = System.getenv("GITHUB_OUTPUT");
 			if(status == 204)
