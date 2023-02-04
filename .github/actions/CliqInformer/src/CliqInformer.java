@@ -19,7 +19,7 @@ public class CliqInformer {
 	public static void main(String args[]) {
 		System.out.println("Calling Cliq...");
 		HttpURLConnection connection;
-		Integer MAX_MESSAGE_LENGTH = 4000;
+		Integer MAX_MESSAGE_LENGTH = 4096;
 		Integer status = 400;
 		StringBuffer responseContent = new StringBuffer();
 		try {
