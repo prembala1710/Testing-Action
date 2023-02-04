@@ -86,7 +86,8 @@ public class CliqInformer {
 			}
 			for(String msg : messages)
 			{
-			  String TextParams = "{\n\"text\":\"" + message + "\",\n\"bot\":\n{\n\"name\":\"CliqInformer\",\n\"image\":\"" + CliqInformerURL + "\"\n}}\n";
+			  msg = msg.replace("\"","'");
+			  String TextParams = "{\n\"text\":\"" + msg + "\",\n\"bot\":\n{\n\"name\":\"CliqInformer\",\n\"image\":\"" + CliqInformerURL + "\"\n}}\n";
 			  connection = (HttpURLConnection) new URL(CliqChannelLink + "?zapikey=" + CliqWebhookToken).openConnection();
 			  connection.setRequestMethod("POST");
 			  connection.setRequestProperty("Content-Type","application/json");
