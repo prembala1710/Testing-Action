@@ -14,12 +14,13 @@ import static java.nio.file.StandardOpenOption.CREATE;
 import static java.nio.file.StandardOpenOption.WRITE;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
+import java.util.ArrayList;
 public class CliqInformer {
 	public static void main(String args[]) {
 		System.out.println("Calling Cliq...");
 		HttpURLConnection connection;
 		Integer MAX_MESSAGE_LENGTH = 2878;
+		Integer status;
 		StringBuffer responseContent = new StringBuffer();
 		try {
       boolean error = false;
@@ -74,7 +75,7 @@ public class CliqInformer {
 			message = message.replace("(action)",Action);
 			message = message.replace("(ref)","[" + Ref + "](" + RefURL + ")" );
 			ArrayList<String> messages = new ArrayList<String>();
-			for(i = 0 ; i < message.length ; i+= MAX_MESSAGE_LENGTH)
+			for(int i = 0 ; i < message.length() ; i+= MAX_MESSAGE_LENGTH)
 			{
 			  String split_message;
 			  if(i+MAX_MESSAGE_LENGTH < message.length())
@@ -94,7 +95,7 @@ public class CliqInformer {
 			  os.write(TextParams.getBytes());
 			  os.flush();
 			  os.close();
-			  int status = connection.getResponseCode();
+			  status = connection.getResponseCode();
 			  if(status > 299) {
 				  BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
 				  String line;
