@@ -73,15 +73,16 @@ public class CliqInformer {
 			message = message.replace("(me)","[" + Actor + "](" + ActorURL + ")");
 			message = message.replace("(workflow)","[" + Workflow + "](" + WorkflowURL + ")" );
 			message = message.replace("(repo)","[" + Repository + "](" + RepositoryURL + ")" );
-			message = message.replace("(event)",Event);
+			message = message.replace("(event)","*" + Event + "*");
 			message = message.replace("(action)",Action);
 			message = message.replace("(ref)","[" + Ref + "](" + RefURL + ")" );
 			if(message.length() > 4096)
 			{
+			  message = CustomMessage;
 			  message = message.replace("(me)","*" + Actor + "*");
 			  message = message.replace("(workflow)","*" + Workflow + "*" );
 			  message = message.replace("(repo)","*" + Repository + "*" );
-			  message = message.replace("(event)",Event);
+			  message = message.replace("(event)","*" + Event + "*");
 			  message = message.replace("(action)",Action);
 			  message = message.replace("(ref)","*" + Ref + "*" );
 			}
