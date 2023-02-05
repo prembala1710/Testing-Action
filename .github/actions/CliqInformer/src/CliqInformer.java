@@ -20,6 +20,7 @@ public class CliqInformer {
 		System.out.println("Calling Cliq...");
 		HttpURLConnection connection;
 		Integer MAX_MESSAGE_LENGTH = 4096;
+		String Message_BREAK = "\\\n";
 		Integer status = 400;
 		StringBuffer responseContent = new StringBuffer();
 		try {
@@ -87,14 +88,37 @@ public class CliqInformer {
 			  message = message.replace("(ref)","*" + Ref + "*" );
 			}
 			ArrayList<String> messages = new ArrayList<String>();
-			for(int i = 0 ; i < message.length() ; i+= MAX_MESSAGE_LENGTH)
+			for(int i = 0 ; i < message.length() ;)
 			{
 			  String split_message;
 			  if(i+MAX_MESSAGE_LENGTH < message.length())
+			  {
 			    split_message = message.substring(i,i+MAX_MESSAGE_LENGTH);
+			    int displaced_length;
+			    if(split_message.contains("\\\n"))
+			    {
+			      displaced_length = split_message.lastIndexOf("\\\n") + 2;
+			      split_message = message.substring(i,i+displaced_length);
+			      split_message = split_message.replaceAll("\\\\\n","");
+			    }
+			    else if(split_message.contains("\n"))
+			    {
+			      displaced_length = split_message.lastIndexOf("\n") + 1;
+			      split_message = message.substring(i,i+displaced_length);
+			    }
+			    else if(split_message.contains("."))
+			    {
+			      displaced_length = split_message.lastIndexOf(".") + 1;
+			      split_message = message.substring(i,i+displaced_length);
+			    }
+			    i+= displaced_length;
+			  }
 			  else
+			  {
 			    split_message = message.substring(i,message.length());
-			    messages.add(split_message);
+			    i+= MAX_MESSAGE_LENGTH;
+			  }
+			  messages.add(split_message);
 			}
 			for(String msg : messages)
 			{
