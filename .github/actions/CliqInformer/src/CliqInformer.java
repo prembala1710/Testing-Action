@@ -25,6 +25,7 @@ public class CliqInformer {
 		try {
       boolean error = false;
 			String message;
+			String CustomMessage;
 			String CliqWebhookToken = args[0];
 			String CliqChannelLink = args[1];
 			if(!CliqChannelLink.contains("https://cliq.zoho.com/api/v2/channelsbyname/") || !CliqChannelLink.contains("message"))
@@ -67,13 +68,23 @@ public class CliqInformer {
 			String CliqInformerURL = "https://workdrive.zohoexternal.com/external/047d96f793983933bbdb59deb9c44f5443b83a7188e278736405d4d733923181/download?directDownload=true";
 			if(Action.equals(""))
         Action = "made";
-			message = args[10];
+			CustomMessage = args[10];
+			message = CustomMessage;
 			message = message.replace("(me)","[" + Actor + "](" + ActorURL + ")");
 			message = message.replace("(workflow)","[" + Workflow + "](" + WorkflowURL + ")" );
 			message = message.replace("(repo)","[" + Repository + "](" + RepositoryURL + ")" );
 			message = message.replace("(event)",Event);
 			message = message.replace("(action)",Action);
 			message = message.replace("(ref)","[" + Ref + "](" + RefURL + ")" );
+			if(message.length() > 4096)
+			{
+			  message = message.replace("(me)","*" + Actor + "*");
+			  message = message.replace("(workflow)","*" + Workflow + "*" );
+			  message = message.replace("(repo)","*" + Repository + "*" );
+			  message = message.replace("(event)",Event);
+			  message = message.replace("(action)",Action);
+			  message = message.replace("(ref)","*" + Ref + "*" );
+			}
 			ArrayList<String> messages = new ArrayList<String>();
 			for(int i = 0 ; i < message.length() ; i+= MAX_MESSAGE_LENGTH)
 			{
