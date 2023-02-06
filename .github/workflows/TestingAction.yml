@@ -85,8 +85,4 @@ jobs:
           registry-package-message:
           release-message:
           repository-dispatch-message:
-          schedule-message:
-          status-message:
-          watch-message:
-          workflow-dispatch-message:
           default-message: '(event) has Occured'
