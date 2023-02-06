@@ -95,11 +95,11 @@ public class CliqInformer {
 			  {
 			    split_message = message.substring(i,i+MAX_MESSAGE_LENGTH);
 			    int displaced_length = MAX_MESSAGE_LENGTH;
-			    if(split_message.contains("\\\n"))
+			    if(split_message.contains("\\n"))
 			    {
-			      displaced_length = split_message.lastIndexOf("\\\n") + 2;
+			      displaced_length = split_message.lastIndexOf("\\n") + 2;
 			      split_message = message.substring(i,i+displaced_length);
-			      split_message = split_message.replaceAll("\\\\\n","");
+			      split_message = split_message.replaceAll("\\\\n","");
 			    }
 			    else if(split_message.contains("\n"))
 			    {
