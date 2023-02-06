@@ -89,7 +89,7 @@ jobs:
       - name: Set Up CliqInformer
         uses: prembala1710/CliqInformer@v0.0.11
         with:
-          channel-endpoint: { secrets.ENDPOINT }
+          channel-endpoint: ${{ secrets.ENDPOINT }}
           branch-protection-rule-message: 'Security Update ​:security:\n (event) is (action) by (me) at (repo) under (ref)'
           check-run-message: 'Check Run Status :server:\n (event) is (action) by (me) at (repo) under (ref)'
           check-suite-message: 'Check Suite Status :server:\n (event) is (action) by (me) at (repo) under (ref)'
