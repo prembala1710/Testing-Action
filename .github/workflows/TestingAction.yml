@@ -2,42 +2,77 @@ name : Communicating with Cliq
 
 on:
   branch_protection_rule:
+    #types : [created , edited , deleted]
   check_run:
+    #types : [created , rerequested , completed , requested_action]
   check_suite:
+    #types : [completed]
   create:
+    # No Types
   delete:
+    # No Types
   deployment:
+    # No Types
   deployment_status:
+    # No Types
   discussion:
+    # types : [created , edited , deleted , transferred , pinned , unpinned , labeled , unlabeled , locked , unlocked , category_changed , answered , unanswered]
   discussion_comment:
+    # types : [created , edited , deleted]
   fork:
+    # No Types
   gollum:
+    # No Types
   issues:
+    # types : [opened , edited , deleted , transferred , pinned , unpinned , closed , reopened , assigned , unassigned , labeled , unlabeled , locked , unlocked , milestoned , demilestoned]
   issue_comment:
+    # Use this for pull_Request_comment also
+    # types : [created , edited , deleted]
   label:
+    # types : [created , edited , deleted]
   merge_group:
+    # types : [checks_requested]
   milestone:
+    # types : [created , closed , opened , edited , deleted]
   page_build:
+    # No types
   project:
+    # types : [created , closed , reopened , edited , deleted]
   project_card:
+    # types : [created , moved , converted , edited , deleted]
   project_column:
+    # types : [created , updated , moved , deleted]
   public:
+    # No Types
   pull_request:
+    # It works only for opened , synchronize and reopened if not specified
     types: [ assigned , unassigned , labeled , unlabeled , opened , closed , edited , reopened , synchronize , converted_to_draft , ready_for_review , locked , unlocked , review_requested , review_request_removed , auto_merge_enabled , auto_merge_disabled ]
   pull_request_target:
+    # It works only for opened , synchronize and reopened if not specified
     types: [ assigned , unassigned , labeled , unlabeled , opened , closed , edited , reopened , synchronize , converted_to_draft , ready_for_review , locked , unlocked , review_requested , review_request_removed , auto_merge_enabled , auto_merge_disabled ]
   pull_request_review:
+    # types : [submitted , edited , dismissed]
   pull_request_review_comment:
+    # types : [created , edited , deleted]
   push:
+    # No Types
   registry_package:
+    # types : [published , updated]
   release:
+    # types : [published , unpublished , created , edited , deleted , prereleased , released]
   repository_dispatch:
+    # User Defined Types
     types: [on-demand-test]
   schedule:
+    # 'Minute Hour Date Month Day'
+    # 'Starting_Minute/Step_Value Hour Date Month , Day'
     - cron: '1/5 * * * *'
   status:
+    # No Types
   watch:
+    # types : [started]
   workflow_dispatch:
+    # No Types
   
 jobs:
   build_and_test:
@@ -54,35 +89,40 @@ jobs:
       - name: Set Up CliqInformer
         uses: prembala1710/CliqInformer@v0.0.11
         with:
-          cliq-webhook: ${{ secrets.CliqToken }}
-          channel-endpoint: 'cliqinformertestingchannel'
-          branch-protection-rule-message: '(workflow) is triggered by (event) (action) by (me) at (repo) under (ref)'
-          check-run-message: '(workflow) is triggered by (event) (action) by (me) at (repo) under (ref)'
-          check-suite-message: '(workflow) is triggered by (event) (action) by (me) at (repo) under (ref)'
-          create-message: '(workflow) is triggered by (event) (action) by (me) at (repo) under (ref)'
-          delete-message: '(workflow) is triggered by (event) (action) by (me) at (repo) under (ref)'
-          deployment-message:
-          deployment-status-message:
-          discussion-message:
-          discussion-comment-message:
-          fork-message: '(workflow) is triggered by (event) (action) by (me) at (repo) under (ref)'
-          gollum-message: '(workflow) is triggered by (event) (action) by (me) at (repo) under (ref)'
-          issues-message: '(workflow) is triggered by (event) (action) by (me) at (repo) under (ref)'
-          issue-comment-message: '(workflow) is triggered by (event) (action) by (me) at (repo) under (ref)'
-          label-message: '(workflow) is triggered by (event) (action) by (me) at (repo) under (ref)'
+          channel-endpoint: { secrets.ENDPOINT }
+          branch-protection-rule-message: 'Security Update ​:security:\n (event) is (action) by (me) at (repo) under (ref)'
+          check-run-message: 'Check Run Status :server:\n (event) is (action) by (me) at (repo) under (ref)'
+          check-suite-message: 'Check Suite Status :server:\n (event) is (action) by (me) at (repo) under (ref)'
+          create-message: 'Creation :task:\n A (event) has occured'
+          delete-message: 'Delete :milestone:\n A (event) has occured'
+          deployment-message: 'Deployment :server: (event) is made successfully'
+          deployment-status-message: 'Deployment Status Updated :server: (event) is completed successfully'
+          discussion-message: 'Discussions :idea: A (event) has been (action)'
+          discussion-comment-message: 'Discussion Comment :idea: A (event) has been (action)'
+          fork-message: '(repo) has been forked by (me) under (ref)'
+          gollum-message: 'A (event) has Occured'
+          issues-message: 'Oops :surprise: A (event) is (action) by (me) at (repo) under (ref)'
+          issue-comment-message: 'Hey :awe: (workflow) (event) has been (action) by (me) at (repo) under (ref)'
+          label-message: 'Seems Like New Issues required New Labels :curious: A (event) has been (action) by (me)'
           merge-group-message: '(workflow) is triggered by (me) at (repo) under (ref)'
-          milestone-message: '(repo) under (ref) triggers (workflow)'
+          milestone-message: 'Goals need to be Changed as the Project Progresses :milestone: A (event) is (action)'
           page-build-message: '(ref) Branch of (event) is changed by (me)'
-          project-message: 'A (event) (action) is made by (workflow) at (ref)'
-          project-card-message: '(workflow) is triggered by (event) (action) by (me) at (repo) under (ref)'
-          project-column-message: '(workflow) is triggered by (event) (action) by (me) at (repo) under (ref)'
-          public-message: '(workflow) is triggered by (event) (action) by (me) at (repo) under (ref)'
-          pull-request-message: '(workflow) is triggered by (event) (action) by (me) at (repo) under (ref)'
-          pull-request-comment-message: '(workflow) is triggered by (event) (action) by (me) at (repo) under (ref)'
-          pull-request-target-message: '(workflow) is triggered by (event) (action) by (me) at (repo) under (ref)'
-          pull-request-review-message: '(workflow) is triggered by (event) (action) by (me) at (repo) under (ref)'
-          pull-request-review-comment-message: '(workflow) is triggered by (event) (action) by (me) at (repo) under (ref)'
-          registry-package-message:
-          release-message:
-          repository-dispatch-message:
-          default-message: '(event) has Occured'
+          project-message: 'Good Projects are planned well,isn't it?:report:\n A (event) is (action) by (me) at (ref)'
+          project-card-message: 'Good Projects are planned well,isn't it?:report:\n A (event) is (action) by (me) at (ref)'
+          project-column-message: 'Good Projects are planned well,isn't it?:report:\n A (event) is (created) by (me) at (ref)'
+          public-message: 'An Idea is Beneficial Only when it gives back to the Community :peace: (repo) is now Public :celebrate:'
+          pull-request-message: 'A (event) is (action) at (repo) under (ref)'
+          pull-request-comment-message: 'You have got a Comment for aPull Request Dude :curious: A (event) is (action) at (repo) under (ref)'
+          pull-request-target-message: 'A (event) is (action) at (repo) under (ref)'
+          pull-request-review-message: 'You have got a Review Dude :curious: A (event) is (action) at (repo) under (ref)'
+          pull-request-review-comment-message: 'You have got a Review Comment Dude :curious: A (event) is (action) at (repo) under (ref)'
+          push-message: 'A (event) is made into (repo) under (ref). Good to see you make some Changes :new-year:'
+          registry-package-message: ':gift: A Build is (action) at (repo)'
+          release-message: ':target: (ref) has been Released Successfully'
+          repository-dispatch-message: ':report: A (event) has triggered this following workflow: (workflow)'
+          schedule-message: 'Scheduled Event Trigger :calendar:\n (workflow) has been Scheduled to run at this time. Take a Look at it here (workflow)'
+          status-message: 'Status has been Updated at (repo)'
+          watch-message: ':fireworks: (me) has starred your Repository (repo)'
+          workflow-dispatch-message: ':office: (workflow) has been dispatched by (me) at (repo) under (ref)'
+          default-message: '(event) has happened. Hope You are Aware of it :wink:'
+          set-message-if-none: true
