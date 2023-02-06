@@ -1,7 +1,43 @@
-name : Github ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub ActGithub Act
+name : Communicating with Cliq
 
-on: 
+on:
+  branch_protection_rule:
+  check_run:
+  check_suite:
+  create:
+  delete:
+  deployment:
+  deployment_status:
+  discussion:
+  discussion_comment:
+  fork:
+  gollum:
+  issues:
+  issue_comment:
+  label:
+  merge_group:
+  milestone:
+  page_build:
+  project:
+  project_card:
+  project_column:
+  public:
+  pull_request:
+    types: [ assigned , unassigned , labeled , unlabeled , opened , closed , edited , reopened , synchronize , converted_to_draft , ready_for_review , locked , unlocked , review_requested , review_request_removed , auto_merge_enabled , auto_merge_disabled ]
+  pull_request_comment:
+  pull_request_target:
+    types: [ assigned , unassigned , labeled , unlabeled , opened , closed , edited , reopened , synchronize , converted_to_draft , ready_for_review , locked , unlocked , review_requested , review_request_removed , auto_merge_enabled , auto_merge_disabled ]
+  pull_request_review:
+  pull_request_review_comment:
   push:
+  registry_package:
+  release:
+  repository_dispatch:
+  schedule:
+    - cron: '1/5 * * * *'
+  status:
+  watch:
+  workflow_dispatch:
   
 jobs:
   build_and_test:
