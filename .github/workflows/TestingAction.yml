@@ -82,7 +82,6 @@ jobs:
           pull-request-target-message: '(workflow) is triggered by (event) (action) by (me) at (repo) under (ref)'
           pull-request-review-message: '(workflow) is triggered by (event) (action) by (me) at (repo) under (ref)'
           pull-request-review-comment-message: '(workflow) is triggered by (event) (action) by (me) at (repo) under (ref)'
-          push-message: 'A (event)\\n is made in (workflow)'
           registry-package-message:
           release-message:
           repository-dispatch-message:
@@ -90,3 +89,4 @@ jobs:
           status-message:
           watch-message:
           workflow-dispatch-message:
+          default-message: '(event) has Occured'
