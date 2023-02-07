@@ -91,3 +91,4 @@ jobs:
         with:
           channel-endpoint: ${{ secrets.ENDPOINT }}
           set-message-if-none: true
+          # false makes CliqInformer not send the default messsage if custom message is not set
