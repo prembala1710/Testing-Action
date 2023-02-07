@@ -90,5 +90,5 @@ jobs:
         uses: prembala1710/CliqInformer@v0.0.11
         with:
           channel-endpoint: ${{ secrets.ENDPOINT }}
-          set-message-if-none: false
+          watch-message: ':fireworks: (me) has starred your Repository (repo)'
           # false makes CliqInformer not send the default messsage if custom message is not set
