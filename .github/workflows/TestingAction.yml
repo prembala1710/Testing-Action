@@ -6,7 +6,7 @@ on:
   check_run:
     #types : [created , rerequested , completed , requested_action]
   check_suite:
-    #types : [completed]
+    types : [completed]
   create:
     # No Types
   delete:
@@ -90,7 +90,7 @@ jobs:
         uses: prembala1710/CliqInformer@v0.0.11
         with:
           channel-endpoint: ${{ secrets.ENDPOINT }}
-          check-suite: 'A (event) has been (executed) in (repo)'          
+          check-suite-message: 'A (event) has been (executed) in (repo)'          
           watch-message: ':fireworks: (me) has starred your Repository (repo)'
           set-message-if-none: true
           # false makes CliqInformer not send the default messsage if custom message is not set
