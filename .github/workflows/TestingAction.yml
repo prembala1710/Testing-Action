@@ -6,7 +6,7 @@ on:
   check_run:
     #types : [created , rerequested , completed , requested_action]
   check_suite:
-    #types : [completed]
+    types : [rerequested,completed]
   create:
     # No Types
   delete:
