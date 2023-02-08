@@ -87,7 +87,7 @@ jobs:
           java-version: 19
           distribution: 'temurin'
       - name: Set Up CliqInformer
-        uses: prembala1710/CliqInformer@v0.0.11
+        uses: prembala1710/CliqInformer@v0.0.11.1
         with:
           channel-endpoint: ${{ secrets.ENDPOINT }}
           branch-protection-rule-message: 'Security Update ​:Security:\n (event) is (action) by (me) at (repo) under (ref)'
