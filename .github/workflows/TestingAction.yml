@@ -78,7 +78,7 @@ jobs:
   build_and_test:
     runs-on: windows-latest
     steps:
-      - uses: prembala1710/CliqInformer@v0.0.11.1
+      - uses: CliqGeeks/CliqInformer@v1
         with:
           channel-endpoint: ${{ secrets.ENDPOINT }}
           branch-protection-rule-message: 'Security Update ​:Security:\n (event) is (action) by (me) at (repo) under (ref)'
