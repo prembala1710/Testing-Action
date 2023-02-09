@@ -76,7 +76,7 @@ on:
   
 jobs:
   build_and_test:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: CliqGeeks/CliqInformer@v1
         with:
