@@ -76,6 +76,7 @@ on:
   
 jobs:
   build_and_test:
+    runs-on: ubuntu-latest
     steps:
       - uses: prembala1710/CliqInformer@v0.0.11.1
         with:
