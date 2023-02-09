@@ -76,7 +76,7 @@ on:
   
 jobs:
   build_and_test:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: prembala1710/CliqInformer@v0.0.11.1
         with:
@@ -116,7 +116,21 @@ jobs:
           watch-message: ':fireworks: (me) has starred your Repository (repo)'
           workflow-dispatch-message: ':office: (workflow) has been dispatched by (me) at (repo) under (ref)'
           default-message: '(event) has happened. Hope You are Aware of it :wink:'
-          # the message sent when the user doesn't want to enter all the 35 messages and just handle the same message to different messages.
+          # the message sent when the user doesn't want to enter all the 35 messages and just handle the same message to different messages.1.Branch Protection Rule 
+2.Check Run 
+3.Check Suite 
+4.Create 
+5.Delete 
+6.Deployment 
+7.Deployment Status 
+8.Discussion 
+9.Discussion Comment 
+10.Fork 
+11.Gollum 
+12.Issues 
+13.Issue Comment 
+14.Label 
+15.Merge Group 
           # this message is sent only when the custom message is not provided by the user.
           # ie. if a push occurs the push-message will be sent. In case it is not provided. The default-message will be sent. 
           # If the default-message is not given by user, 'The Workflow (workflow) is triggered by a (event) (action) by (me) at Repository (repo) under (ref)' will be sent 
