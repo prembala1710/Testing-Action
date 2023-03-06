@@ -578,7 +578,7 @@ public class CliqInformer {
 						}
 						else if(Action.equals("deleted"))
 						{
-							message = "[" + Releaser + "](" + ServerURL + Releaser + ") has deleted a release [" + ReleaseName + " " + ReleaseTagName + "](" + ReleaseURL + ")";
+							message = "[" + Releaser + "](" + ServerURL + Releaser + ") has deleted a release " + ReleaseName + " " + ReleaseTagName ;
 						}
 						message = message + " \\n" + ReleaseURL;
 					}
