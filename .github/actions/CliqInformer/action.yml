@@ -329,6 +329,8 @@ runs:
           elif ${{env.message == ''}}
           then
             echo "CUSTOM_MESSAGE=" >> $GITHUB_ENV
+          else
+            echo "CUSTOM_MESSAGE=${{ env.message}}" >> $GITHUB_ENV
           fi
       - name: "Running the Cliq Integration"
         id: send-message
