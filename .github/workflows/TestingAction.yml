@@ -39,7 +39,7 @@ on:
   pull_request:
     # It works only for opened , synchronize and reopened if not specified
     types: [ assigned , unassigned , labeled , unlabeled , opened , closed , edited , reopened , synchronize , converted_to_draft , ready_for_review , locked , unlocked , review_requested , review_request_removed , auto_merge_enabled , auto_merge_disabled ]
-  #pull_request_target:
+  pull_request_target:
     # It works only for opened , synchronize and reopened if not specified
   #  types: [ assigned , unassigned , labeled , unlabeled , opened , closed , edited , reopened , synchronize , converted_to_draft , ready_for_review , locked , unlocked , review_requested , review_request_removed , auto_merge_enabled , auto_merge_disabled ]
   pull_request_review:
