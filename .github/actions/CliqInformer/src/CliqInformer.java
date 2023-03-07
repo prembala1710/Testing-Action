@@ -214,7 +214,7 @@ public class CliqInformer {
 					else if(Event.equals("Discussion Comment"))
 					{
 						String Discusser = (String) System.getenv("GITHUB_ACTOR");
-						String DiscussionTitle = (String) System.getenv("DISCUSSION_TITLE");
+						String DiscussionTitle = (String) System.getenv("DISCUSSION");
 						String DiscussionComment = (String) System.getenv("DISCUSSION_COMMENT");
 						String DiscussionURL = (String) System.getenv("DISCUSSION_URL");
 						String CommentURL = (String) System.getenv("COMMENT_URL");
@@ -631,6 +631,29 @@ public class CliqInformer {
 					message = message.replace("(repo)","[" + Repository + "](" + RepositoryURL + ")" );
 					message = message.replace("(event)","*" + Event + "*");
 					message = message.replace("(action)",Action);
+					message = message.replace("(ref)",(String) System.getenv("GITHUB_REF_TYPE") + " " + System.getenv("GITHUB_REF_NAME"));
+					message = message.replace("(workflow)",(String) System.getenv("GITHUB_WORKFLOW"));
+					if(System.getenv("BRANCH_RULE") != null)
+						message = message.replace("(rule)",(String) System.getenv("BRANCH_RULE"));
+					if(System.getenv("LABEL_NAME") != null)
+						message = message.replace("(label)",(String) System.getenv("LABEL_NAME"));
+					if(System.getenv("MILESTONE_NAME") != null)
+						message = message.replace("(milestone)",(String) System.getenv("MILESTONE"));
+					if(System.getenv("RELEASE_NAME") != null)
+						message = message.replace("(release)",(String) System.getenv("RELEASE_NAME"));
+					if(System.getenv("PACKAGE_NAME") != null)
+						message = message.replace("(package)",(String) System.getenv("REGISTRY_PACKAGE_NAME");
+					if(System.getenv("PULL_REQUEST_TITLE") != null)
+						message = message.replace("(pull)",(String) System.getenv("PULL_REQUEST_TITLE"));
+					if(System.getenv("ISSUE_TITLE") != null)
+						message	= message.replace("(issue)",(String) System.getenv("ISSUE_TITLE"));
+					if(System.getenv("CHECK_RUN_NAME") != null)
+						message = message.replace("(run)",(String) System.getenv("CHECK_RUN_NAME"));
+					if(System.getenv("DEPLOYMENT_ENV") != null)
+						message = message.replace("(deployment)",(String) System.getenv("DEPLOYMENT_ENV"));
+					if(System.getenv("STATUS") != null)
+						message = message.replace("(status)",(String) System.getenv("STATUS"));
+
 				}
 				System.out.println(message);
 				ArrayList<String> messages = new ArrayList<String>();
