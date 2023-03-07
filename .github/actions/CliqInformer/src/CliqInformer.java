@@ -639,7 +639,7 @@ public class CliqInformer {
 						message = message.replace("(rule)",(String) System.getenv("BRANCH_RULE"));
 					if(System.getenv("LABEL_NAME") != null)
 						message = message.replace("(label)",(String) System.getenv("LABEL_NAME"));
-					if(System.getenv("MILESTONE_NAME") != null)
+					if(System.getenv("MILESTONE") != null)
 						message = message.replace("(milestone)",(String) System.getenv("MILESTONE"));
 					if(System.getenv("RELEASE_NAME") != null)
 						message = message.replace("(release)",(String) System.getenv("RELEASE_NAME"));

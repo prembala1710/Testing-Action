@@ -89,7 +89,7 @@ jobs:
           issue-comment-message: 'Hey :awe:\n (event) has been (action) by (me) at (issue)'
           label-message: 'Seems Like New Issues required New Labels :curious:\n A (event) (label) has been (action) by (me)'
           milestone-message: 'Goals need to be Changed as the Project Progresses :milestone:\n A (event) (milestone) is (action)'
-          page-build-message: 'A (event) is ,made by (me) for (repo)'
+          page-build-message: 'A (event) is made by (me) for (repo)'
           public-message: 'An Idea is Beneficial Only when it gives back to the Community :peace:\n (repo) is now made Public by (me) :celebrate:'
           pull-request-message: 'A (event) is (action) at (pull) at (repo)'
           pull-request-comment-message: 'You have got a Comment for a Pull Request Dude :curious:\n A (event) is (action) at (pull) at (repo)'
