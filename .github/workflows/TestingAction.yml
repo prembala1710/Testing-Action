@@ -91,7 +91,7 @@ jobs:
           milestone-message: 'Goals need to be Changed as the Project Progresses :milestone:\n A (event) (milestone) is (action)'
           page-build-message: 'A (event) is made by (me) for (repo)'
           public-message: 'An Idea is Beneficial Only when it gives back to the Community :peace:\n (repo) is now made Public by (me) :celebrate:'
-          pull-request-message: 'A (event) is (action) at (pull) at (repo)'
+          pull-request-message: 'A (event) is (action) at (pull) at (repo) to (assignee) (label)'
           pull-request-comment-message: 'You have got a Comment for a Pull Request Dude :curious:\n A (event) is (action) at (pull) at (repo)'
           pull-request-target-message: 'A (event) is (action) at (repo) under (ref)'
           pull-request-review-message: 'You have got a Review Dude :curious:\n A (event) is (action) at (pull) at (repo)'
