@@ -629,6 +629,8 @@ public class CliqInformer {
 				{
 					message = message.replace("(me)","[" + Actor + "](" + ActorURL + ")");
 					message = message.replace("(repo)","[" + Repository + "](" + RepositoryURL + ")" );
+					if(Event.equals("Create") || Event.equals("Delete"))
+						Event = Event + "d";
 					message = message.replace("(event)","*" + Event + "*");
 					message = message.replace("(action)",Action);
 					message = message.replace("(ref)",(String) System.getenv("GITHUB_REF_TYPE") + " " + System.getenv("GITHUB_REF_NAME"));
