@@ -643,7 +643,7 @@ public class CliqInformer {
 						message = message.replace("(milestone)",(String) System.getenv("MILESTONE"));
 					if(System.getenv("RELEASE_NAME") != null)
 						message = message.replace("(release)",(String) System.getenv("RELEASE_NAME"));
-					if(System.getenv("PACKAGE_NAME") != null)
+					if(System.getenv("REGISTRY_PACKAGE_NAME") != null)
 						message = message.replace("(package)",(String) System.getenv("REGISTRY_PACKAGE_NAME"));
 					if(System.getenv("PULL_REQUEST_TITLE") != null)
 						message = message.replace("(pull)",(String) System.getenv("PULL_REQUEST_TITLE"));
