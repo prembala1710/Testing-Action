@@ -657,7 +657,8 @@ public class CliqInformer {
 						message = message.replace("(status)",(String) System.getenv("STATUS"));
 					if(System.getenv("BRANCH_NAME") != null)
 						message = message.replace("(branch)", (String) System.getenv("BRANCH_TYPE") + " " + System.getenv("BRANCH_NAME"));
-
+					if(System.getenv("DISCUSSION") != null)
+						message = message.replace("(discussion)",(String) System.getenv("DISCUSSION"));
 				}
 				System.out.println(message);
 				ArrayList<String> messages = new ArrayList<String>();

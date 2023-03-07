@@ -81,7 +81,7 @@ jobs:
           delete-message: 'Delete :milestone:\n (branch) has been (event) by (me)'
           deployment-message: 'Deployment :server:\n (event) (deployment) is created successfully'
           deployment-status-message: 'Deployment Status Updated :server:\n (event) of (deployment) is updated to (status) successfully'
-          discussion-message: 'Discussions :idea:\n A (event) (discussion) has been (action)'
+          discussion-message: 'Discussions :idea:\n A (event) (discussion) has been (action) as (label)'
           discussion-comment-message: 'Discussion Comment :idea:\n A (event) has been (action) at (discussion)'
           fork-message: '(repo) has been forked by (me) under (ref)'
           gollum-message: 'Changes have been made in the Wiki Pages of (repo) by (me)'
