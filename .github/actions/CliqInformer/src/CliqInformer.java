@@ -638,63 +638,63 @@ public class CliqInformer {
 					if(System.getenv("BRANCH_RULE") != null)
 						message = message.replace("(rule)",(String) System.getenv("BRANCH_RULE"));
 					else
-						message.replace("(rule)","");
+						message = message.replace("(rule)","");
 					if(System.getenv("LABEL_NAME") != null)
 						message = message.replace("(label)",(String) System.getenv("LABEL_NAME"));
 					if(System.getenv("MILESTONE") != null)
 						message = message.replace("(milestone)",(String) System.getenv("MILESTONE"));
 					else
-						message.replace("(milestone)","");
+						message = message.replace("(milestone)","");
 					if(System.getenv("RELEASE_NAME") != null)
 						message = message.replace("(release)",(String) System.getenv("RELEASE_NAME"));
 					else
-						message.replace("(release)","");
+						message = message.replace("(release)","");
 					if(System.getenv("REGISTRY_PACKAGE_NAME") != null)
 						message = message.replace("(package)",(String) System.getenv("REGISTRY_PACKAGE_NAME"));
 					else
-						message.replace("(package)","");
+						message = message.replace("(package)","");
 					if(System.getenv("PULL_REQUEST_TITLE") != null)
 						message = message.replace("(pull)",(String) System.getenv("PULL_REQUEST_TITLE"));
 					if(System.getenv("ISSUE_TITLE") != null && Event.equals("issue_comment") && ((String)System.getenv("ISSUE_TYPE")).equals("PULL_REQUEST"))
 						message = message.replace("(pull)",(String) System.getenv("ISSUE_TITLE"));
 					else
-						message.replace("(pull)","");
+						message = message.replace("(pull)","");
 					if(System.getenv("ISSUE_TITLE") != null)
 						message	= message.replace("(issue)",(String) System.getenv("ISSUE_TITLE"));
 					else
-						message.replace("(issue)","");
+						message = message.replace("(issue)","");
 					if(System.getenv("CHECK_RUN_NAME") != null)
 						message = message.replace("(run)",(String) System.getenv("CHECK_RUN_NAME"));
 					else
-						message.replace("(run)","");
+						message = message.replace("(run)","");
 					if(System.getenv("DEPLOYMENT_ENV") != null)
 						message = message.replace("(deployment)",(String) System.getenv("DEPLOYMENT_ENV"));
 					else
-						message.replace("(deployment)","");
+						message = message.replace("(deployment)","");
 					if(System.getenv("STATUS") != null)
 						message = message.replace("(status)",(String) System.getenv("STATUS"));
 					else
-						message.replace("(status)","");
+						message = message.replace("(status)","");
 					if(System.getenv("BRANCH_NAME") != null)
 						message = message.replace("(branch)", (String) System.getenv("BRANCH_TYPE") + " " + System.getenv("BRANCH_NAME"));
 					else
-						message.replace("(branch)","");
+						message = message.replace("(branch)","");
 					if(System.getenv("DISCUSSION") != null)
 						message = message.replace("(discussion)",(String) System.getenv("DISCUSSION"));
 					else
-						message.replace("(discussion)","");
+						message = message.replace("(discussion)","");
 					if(System.getenv("CATEGORY_NAME") != null)
 						message = message.replace("(category)", (String) System.getenv("CATEGORY_NAME"));
 					else
-						message.replace("(category)","");
+						message = message.replace("(category)","");
 					if(System.getenv("ASSIGNED_USER") != null)
 						message = message.replace("(assignee)", (String) System.getenv("ASSIGNED_USER"));
 					else
-						message.replace("(assignee)","");
+						message = message.replace("(assignee)","");
 					if(System.getenv("ASSIGNED_LABEL") != null)
 						message = message.replace("(label)", (String) System.getenv("ASSIGNED_LABEL"));
 					else
-						message.replace("(label)","");
+						message = message.replace("(label)","");
 				}
 				System.out.println(message);
 				ArrayList<String> messages = new ArrayList<String>();
