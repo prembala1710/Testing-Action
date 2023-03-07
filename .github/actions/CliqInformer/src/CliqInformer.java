@@ -648,7 +648,7 @@ public class CliqInformer {
 					if(System.getenv("PULL_REQUEST_TITLE") != null)
 						message = message.replace("(pull)",(String) System.getenv("PULL_REQUEST_TITLE"));
 					if(System.getenv("ISSUE_TITLE") != null && Event.equals("issue_comment") && ((String)System.getenv("ISSUE_TYPE")).equals("PULL_REQUEST"))
-						message = message.return ("(pull)",(String) System.getenv("ISSUE_TITLE"));
+						message = message.replace("(pull)",(String) System.getenv("ISSUE_TITLE"));
 					if(System.getenv("ISSUE_TITLE") != null)
 						message	= message.replace("(issue)",(String) System.getenv("ISSUE_TITLE"));
 					if(System.getenv("CHECK_RUN_NAME") != null)
