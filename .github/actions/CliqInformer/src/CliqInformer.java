@@ -655,6 +655,8 @@ public class CliqInformer {
 						message = message.replace("(deployment)",(String) System.getenv("DEPLOYMENT_ENV"));
 					if(System.getenv("STATUS") != null)
 						message = message.replace("(status)",(String) System.getenv("STATUS"));
+					if(System.getenv("BRANCH_NAME") != null)
+						message = message.replace("(branch)", (String) System.getenv("BRANCH_TYPE") + " " + System.getenv("BRANCH_NAME"));
 
 				}
 				System.out.println(message);
