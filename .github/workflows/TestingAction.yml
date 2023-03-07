@@ -99,7 +99,7 @@ jobs:
           push-message: 'A (event) is made into (repo).\n Good to see you make some Changes :new-year:'
           registry-package-message: ':gift-box: A Build of (package) is (action) at (repo)'
           release-message: ':target: (event) (release) has been (action) Successfully'
-          repository-dispatch-message: ':report: A (event) has triggered this following workflow: (workflow)'
+          repository-dispatch-message: ':report: A (event) of (action) has triggered this following workflow: (workflow)'
           schedule-message: 'Scheduled Event Trigger :calendar:\n (workflow) has been Scheduled to run at this time in (repo)'
           status-message: 'Status has been Updated to (status) at (repo)'
           watch-message: ':fireworks: (me) has starred your Repository (repo)'
