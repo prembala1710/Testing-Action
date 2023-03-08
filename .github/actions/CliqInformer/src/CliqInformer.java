@@ -247,7 +247,7 @@ public class CliqInformer {
 					{
 						String PageHandler = (String) System.getenv("GITHUB_ACTOR");
 						String Pages = (String) System.getenv("GOLLUM");
-						message = "A few changes has been made to the [Wiki pages](" + RepositoryURL + "/wiki) of [" + Repository + "](" + RepositoryURL + ") by " + "[" + PageHandler + "](" + ServerURL + PageHandler + ")";
+						message = "A few changes has been made to the [Wiki pages](" + RepositoryURL + "/wiki) of [" + Repository + "](" + RepositoryURL + ") by " + "[" + PageHandler + "](" + ServerURL + PageHandler + ")" + Pages;
 						message = message + " \\n" + RepositoryURL;
 					}
 					else if(Event.equals("Issues"))
