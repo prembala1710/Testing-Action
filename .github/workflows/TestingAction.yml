@@ -38,4 +38,4 @@ jobs:
   test_name:
     runs-on: ubuntu-latest
     steps:
-      - uses: ./CliqGeeks/CliqInformer@v1
+      - uses: CliqGeeks/CliqInformer@v1
