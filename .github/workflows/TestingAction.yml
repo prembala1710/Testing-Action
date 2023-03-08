@@ -36,7 +36,7 @@ on:
   workflow_dispatch:
   
 jobs:
-  test_name:
+  test_job:
     runs-on: ubuntu-latest
     steps:
       - uses: ./.github/actionsCliqInformer
