@@ -39,3 +39,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: CliqGeeks/CliqInformer@v1
+        with:
+          channel-endpoint: ${{ secrets.ENDPOINT }}
