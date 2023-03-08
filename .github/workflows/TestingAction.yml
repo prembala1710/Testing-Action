@@ -20,6 +20,7 @@ on:
   page_build:
   public:
   pull_request:
+    types: [opened,closed,reopened,created,edited]
   pull_request_target:
   pull_request_review:
   pull_request_review_comment:
