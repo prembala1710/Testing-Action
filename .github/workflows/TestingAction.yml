@@ -39,7 +39,7 @@ jobs:
   test_job:
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/actionsCliqInformer
+      - uses: ./.github/actions/CliqInformer
         with:
           channel-endpoint: ${{ secrets.ENDPOINT }}
   test_name:
