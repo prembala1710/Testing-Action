@@ -268,11 +268,11 @@ public class CliqInformer {
 						for (HashMap<String,String> PageDetails : PageArray)
 						{
 						    if(PageDetails.get("title").toLowerCase().contains("_footer"))
-							message = message + "\\nThe (Footer)[" + PageDetails.get("html_url") + "] has been " + PageDetails.get("action");
+							message = message + "\\nThe [Footer](" + PageDetails.get("html_url") + ") has been " + PageDetails.get("action");
 						    else if(PageDetails.get("title").toLowerCase().contains("_sidebar"))
-							message = message + "\\nThe (Sidebar)[" + PageDetails.get("html_url") + "] has been " + PageDetails.get("action");
+							message = message + "\\nThe [Sidebar](" + PageDetails.get("html_url") + ") has been " + PageDetails.get("action");
 						    else
-							message = message + "\\nThe Page (" + PageDetails.get("html_url") + ") has been " + PageDetails.get("action") ;
+							message = message + "\\nThe Page [" + PageDetails.get("title") + "](" + PageDetails.get("html_url") + ") has been " + PageDetails.get("action") ;
 						}
 						message = message + " \\n" + RepositoryURL + "/wiki/";
 					}
