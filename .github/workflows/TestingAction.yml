@@ -39,6 +39,6 @@ jobs:
   test_name:
     runs-on: ubuntu-latest
     steps:
-      - uses: prembala1710/CliqInformer@v0.0.2
+      - uses: ./.github/actions/CliqInformer
         with:
           channel-endpoint: ${{ secrets.ENDPOINT }}
