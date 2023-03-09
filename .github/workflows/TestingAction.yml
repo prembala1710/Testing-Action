@@ -42,4 +42,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/CliqInformer
         with:
+          env:
+            title: ${{github.event_name}}
           channel-endpoint: ${{ secrets.ENDPOINT }}
