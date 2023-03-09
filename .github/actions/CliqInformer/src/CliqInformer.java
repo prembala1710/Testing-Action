@@ -269,12 +269,12 @@ public class CliqInformer {
 						{
 						    if(PageDetails.get("title").toLowerCase().contains("_footer"))
 							message = "\nThe (Footer)[" + PageDetails.get("html_url") + "] has been " + PageDetails.get("action");
-						    else if(PageDetails.get("title").toLowerCase().containsIgnoreCase("_idebar"))
+						    else if(PageDetails.get("title").toLowerCase().contains("_sidebar"))
 							message = "\nThe (Sidebar)[" + PageDetails.get("html_url") + "] has been " + PageDetails.get("action");
 						    else
 							message = "\nThe Page (" + PageDetails.get("html_url") + ") has been " + PageDetails.get("action") ;
 						}
-						message = message + " \\n" + RepositoryURL;
+						message = message + " \\n" + RepositoryURL + "/wiki/";
 					}
 					else if(Event.equals("Issues"))
 					{
