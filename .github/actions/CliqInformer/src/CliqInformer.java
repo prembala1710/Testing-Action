@@ -252,7 +252,7 @@ public class CliqInformer {
 						message = message + "\\nHere is some of them\\n";
 						ArrayList<HashMap<String,String>> PageArray = new ArrayList<HashMap<String,String>>();
 						HashMap<String,String> Page = new HashMap<String,String>();
-						for (String Line: s.split("\n"))
+						for (String Line: Pages.split("\n"))
 						{
 						    if(Line.contains("title") || Line.contains("html_url") || Line.contains("action"))
 						    {
@@ -265,7 +265,7 @@ public class CliqInformer {
                 					Page = new HashMap<String,String>();
 						    }
 						}
-						for (HashMap<String,String> Pagedetails : PageArray)
+						for (HashMap<String,String> PageDetails : PageArray)
 						{
 						    if(PageDetails.get("title").containsIgnoreCase("_Footer"))
 							message = "\nThe (Footer)[" + PageDetails.get("html_url") + "] has been " + PageDetails.get("action");
