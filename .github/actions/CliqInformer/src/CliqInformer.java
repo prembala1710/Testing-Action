@@ -17,6 +17,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Objects;
+import java.util.HashMap;
 public class CliqInformer {
 	public static void main(String args[]) {
 		System.out.println("Calling Cliq...");
@@ -247,7 +248,32 @@ public class CliqInformer {
 					{
 						String PageHandler = (String) System.getenv("GITHUB_ACTOR");
 						String Pages = (String) System.getenv("GOLLUM");
-						message = "A few changes has been made to the [Wiki pages](" + RepositoryURL + "/wiki) of [" + Repository + "](" + RepositoryURL + ") by " + "[" + PageHandler + "](" + ServerURL + PageHandler + ")" + Pages;
+						message = "A few changes has been made to the [Wiki pages](" + RepositoryURL + "/wiki) of [" + Repository + "](" + RepositoryURL + ") by " + "[" + PageHandler + "](" + ServerURL + PageHandler + ")";
+						message = message + "\\nHere is some of them\\n"
+						ArrayList<HashMap<String,String>> PageArray = new ArrayList<HashMap<String,String>>();
+						HashMap<String,String> Page = new HashMap<String,String>();
+						for (String Line: s.split("\n"))
+						{
+						    if(Line.contains("title") || Line.contains("html_url") || Line.contains("action"))
+						    {
+							String[] keyValuePair= LineBreaker(Line);
+							Page.put(keyValuePair[0],keyValuePair[1]);
+						    }
+						    if(Line.contains("}"))
+						    {
+							PageArray.add(Page);
+                					Page = new HashMap<String,String>();
+						    }
+						}
+						for (HashMap<String,String> Pagedetails : PageArray)
+						{
+						    if(PageDetails.get("title").containsIgnoreCase("_Footer"))
+							message = "\nThe (Footer)[" + PageDetails.get("html_url") + "] has been " + PageDetails.get("action");
+						    else if(PageDetails.get("title").containsIgnoreCase("_Sidebar"))
+							message = "\nThe (Sidebar)[" + PageDetails.get("html_url") + "] has been " + PageDetails.get("action");
+						    else
+							message = "\nThe Page (" + PageDetails.get("html_url") + ") has been " + PageDetails.get("action") ;
+						}
 						message = message + " \\n" + RepositoryURL;
 					}
 					else if(Event.equals("Issues"))
