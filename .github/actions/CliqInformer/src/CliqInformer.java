@@ -889,4 +889,46 @@ public class CliqInformer {
 		Files.write(file, lines, UTF_8 , CREATE , APPEND , WRITE);
 		System.out.println("Message - Status : " + Status);
 	}
+	
+	//to Split JSON for Single Line Key Value Pairs
+    public static String[] LineBreaker(String Line)
+    { 
+        Boolean isBetweenQuotes = false;
+        Integer count = 0;
+        Integer startindex = 0;
+        Character prec = '_';
+        Integer len = 0;
+        String key = new String();
+        String value = new String();
+        for (Character c : Line.toCharArray())
+        {
+            if(prec != '\\' && c == '"')
+            {
+                isBetweenQuotes = !isBetweenQuotes;
+                if(isBetweenQuotes)
+                    startindex = len;
+                else
+                {
+                    if(count % 4 == 0)
+                    {
+                        key = Line.substring(startindex+1,len);
+                    }
+                    else if(count % 4 == 1)
+                    {
+                        value = Line.substring(startindex+1,len);
+                    }
+                    count++;
+                }
+            }
+            prec = c;
+            len++;
+        }
+        String[] Array = new String[2];
+        if(key != "" && value != "")
+        {
+            Array[0] = key;
+            Array[1] = value;
+        }
+        return Array;
+    }
 }
