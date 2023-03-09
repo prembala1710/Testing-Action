@@ -249,7 +249,7 @@ public class CliqInformer {
 						String PageHandler = (String) System.getenv("GITHUB_ACTOR");
 						String Pages = (String) System.getenv("GOLLUM");
 						message = "A few changes has been made to the [Wiki pages](" + RepositoryURL + "/wiki) of [" + Repository + "](" + RepositoryURL + ") by " + "[" + PageHandler + "](" + ServerURL + PageHandler + ")";
-						message = message + "\\nHere is some of them\\n"
+						message = message + "\\nHere is some of them\\n";
 						ArrayList<HashMap<String,String>> PageArray = new ArrayList<HashMap<String,String>>();
 						HashMap<String,String> Page = new HashMap<String,String>();
 						for (String Line: s.split("\n"))
