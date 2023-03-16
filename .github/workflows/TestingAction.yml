@@ -39,7 +39,7 @@ jobs:
   test_name:
     runs-on: ubuntu-latest
     steps:
-      - uses: CliqGeeks/CliqInformer@v1
+      - uses: Integrations-dev/CliqInformer@v1
         env:
           title: ${{github.event_name}}
         with:
