@@ -167,7 +167,7 @@ runs:
           then
             echo "DISCUSSION_COMMENT=${{ github.event.comment.body }}" >> $GITHUB_ENV
             echo "COMMENT_URL=${{ github.event.comment.html_url }}" >> $GITHUB_ENV
-            echo "DISCUSSION_TITLE=${{ github.event.discussion.title }}" >> $GITHUB_ENV
+            echo "DISCUSSION=${{ github.event.discussion.title }}" >> $GITHUB_ENV
             echo "DISCUSSION_URL=${{ github.event.discussion.html_url }}" >> $GITHUB_ENV
             echo "message=${{inputs.discussion-comment-message}}" >> $GITHUB_ENV
           elif ${{ github.event_name == 'fork' }}
@@ -176,6 +176,9 @@ runs:
             echo "message=${{inputs.fork-message}}" >> $GITHUB_ENV
           elif ${{ github.event_name == 'gollum' }}
           then
+            echo "GOLLUM<<EOF" >>$GITHUB_ENV
+            echo '${{ toJSON(github.event.pages) }}' >> $GITHUB_ENV
+            echo "EOF" >> $GITHUB_ENV
             echo "message=${{inputs.gollum-message}}" >> $GITHUB_ENV
           elif ${{ github.event_name == 'issue_comment' && !github.event.issue.pull_request }}
           then
@@ -234,13 +237,13 @@ runs:
             echo "PULL_REQUEST_URL=${{ github.event.pull_request.html_url }}" >> $GITHUB_ENV
             if ${{github.event.action == 'assigned' || github.event.action == 'unassigned' }}
             then
-              echo "ASSIGNED_USER=${{ github.event.assignee.name }}" >> $GITHUB_ENV
-            elif ${{ github.event.action == 'labeled' || github.event.action == 'unlabelled' }}
+              echo "ASSIGNED_USER=${{ github.event.assignee.login }}" >> $GITHUB_ENV
+            elif ${{ github.event.action == 'labeled' || github.event.action == 'unlabeled' }}
             then 
               echo "ASSIGNED_LABEL=${{ github.event.label.name }}" >> $GITHUB_ENV
             elif ${{ github.event.action == 'review_requested' || github.event.action == 'review_request_removed' }}
             then
-              echo "ASSIGNED_USER=${{ github.event.requested_reviewer.name }}" >> $GITHUB_ENV
+              echo "ASSIGNED_USER=${{ github.event.requested_reviewer.login }}" >> $GITHUB_ENV
             elif ${{ github.event.action == 'milestoned' }}
             then
               echo "MILESTONE=${{ github.event.milestone.name }}" >> $GITHUB_ENV
@@ -255,21 +258,24 @@ runs:
             echo "message=${{inputs.pull-request-review-message}}" >> $GITHUB_ENV
           elif ${{ github.event_name == 'pull_request_review_comment' }}
           then
+            echo "PULL_REQUEST_TITLE=${{ github.event.pull_request.title }}" >> $GITHUB_ENV
+            echo "PULL_REQUEST_NUMBER=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
+            echo "PULL_REQUEST_URL=${{github.event.pull_request.html_url }}" >> $GITHUB_ENV
             echo "message=${{inputs.pull-request-review-comment-message}}" >> $GITHUB_ENV
           elif ${{ github.event_name == 'pull_request_target' }}
           then
-            echo "PULL_REQUEST_TITLE=${{ github.event.pull_request_target.title }}" >> $GITHUB_ENV
-            echo "PULL_REQUEST_NUMBER=${{ github.event.pull_request_target.number }}" >> $GITHUB_ENV
-            echo "PULL_REQUEST_URL=${{ github.event.pull_request_target.html_url }}" >> $GITHUB_ENV
+            echo "PULL_REQUEST_TITLE=${{ github.event.pull_request.title }}" >> $GITHUB_ENV
+            echo "PULL_REQUEST_NUMBER=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
+            echo "PULL_REQUEST_URL=${{ github.event.pull_request.html_url }}" >> $GITHUB_ENV
             if ${{github.event.action == 'assigned' || github.event.action == 'unassigned' }}
             then
-              echo "ASSIGNED_USER=${{ github.event.assignee.name }}" >> $GITHUB_ENV
+              echo "ASSIGNED_USER=${{ github.event.pull_request.assignee.login }}" >> $GITHUB_ENV
             elif ${{ github.event.action == 'labeled' || github.event.action == 'unlabeled' }}
             then 
               echo "ASSIGNED_LABEL=${{ github.event.label.name }}" >> $GITHUB_ENV
             elif ${{ github.event.action == 'review_requested' || github.event.action == 'review_request_removed' }}
             then
-              echo "ASSIGNED_USER=${{ github.event.requested_reviewer.name }}" >> $GITHUB_ENV
+              echo "ASSIGNED_USER=${{ github.event.requested_reviewer.login }}" >> $GITHUB_ENV
             fi
             echo "message=${{inputs.pull-request-target-message}}" >> $GITHUB_ENV
           elif ${{ github.event_name == 'push' }}
@@ -288,7 +294,7 @@ runs:
           then
             echo "RELEASE_NAME=${{ github.event.release.name }}" >> $GITHUB_ENV
             echo "RELEASE_TAG=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
-            echo "RELEASE_HTML=${{ github.event.release.html_url }}" >> $GITHUB_ENV
+            echo "RELEASE_URL=${{ github.event.release.html_url }}" >> $GITHUB_ENV
             echo "message=${{inputs.release-message}}" >> $GITHUB_ENV
           elif ${{ github.event_name == 'repository_dispatch' }}
           then
@@ -326,6 +332,8 @@ runs:
           elif ${{env.message == ''}}
           then
             echo "CUSTOM_MESSAGE=" >> $GITHUB_ENV
+          else
+            echo "CUSTOM_MESSAGE=${{ env.message}}" >> $GITHUB_ENV
           fi
       - name: "Running the Cliq Integration"
         id: send-message

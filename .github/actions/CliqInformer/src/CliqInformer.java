@@ -17,6 +17,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Objects;
+import java.util.HashMap;
 public class CliqInformer {
 	public static void main(String args[]) {
 		System.out.println("Calling Cliq...");
@@ -214,7 +215,7 @@ public class CliqInformer {
 					else if(Event.equals("Discussion Comment"))
 					{
 						String Discusser = (String) System.getenv("GITHUB_ACTOR");
-						String DiscussionTitle = (String) System.getenv("DISCUSSION_TITLE");
+						String DiscussionTitle = (String) System.getenv("DISCUSSION");
 						String DiscussionComment = (String) System.getenv("DISCUSSION_COMMENT");
 						String DiscussionURL = (String) System.getenv("DISCUSSION_URL");
 						String CommentURL = (String) System.getenv("COMMENT_URL");
@@ -246,8 +247,34 @@ public class CliqInformer {
 					else if(Event.equals("Gollum"))
 					{
 						String PageHandler = (String) System.getenv("GITHUB_ACTOR");
+						String Pages = (String) System.getenv("GOLLUM");
 						message = "A few changes has been made to the [Wiki pages](" + RepositoryURL + "/wiki) of [" + Repository + "](" + RepositoryURL + ") by " + "[" + PageHandler + "](" + ServerURL + PageHandler + ")";
-						message = message + " \\n" + RepositoryURL;
+						message = message + "\\nHere is some of them\\n";
+						ArrayList<HashMap<String,String>> PageArray = new ArrayList<HashMap<String,String>>();
+						HashMap<String,String> Page = new HashMap<String,String>();
+						for (String Line: Pages.split("\n"))
+						{
+						    if(Line.contains("title") || Line.contains("html_url") || Line.contains("action"))
+						    {
+							String[] keyValuePair= LineBreaker(Line);
+							Page.put(keyValuePair[0],keyValuePair[1]);
+						    }
+						    if(Line.contains("}"))
+						    {
+							PageArray.add(Page);
+                					Page = new HashMap<String,String>();
+						    }
+						}
+						for (HashMap<String,String> PageDetails : PageArray)
+						{
+						    if(PageDetails.get("title").toLowerCase().contains("_footer"))
+							message = message + "\\nThe [Footer](" + PageDetails.get("html_url") + ") has been " + PageDetails.get("action");
+						    else if(PageDetails.get("title").toLowerCase().contains("_sidebar"))
+							message = message + "\\nThe [Sidebar](" + PageDetails.get("html_url") + ") has been " + PageDetails.get("action");
+						    else
+							message = message + "\\nThe Page [" + PageDetails.get("title") + "](" + PageDetails.get("html_url") + ") has been " + PageDetails.get("action") ;
+						}
+						message = message + " \\n" + RepositoryURL + "/wiki/";
 					}
 					else if(Event.equals("Issues"))
 					{
@@ -386,6 +413,8 @@ public class CliqInformer {
 						String NewWord = new String();
 						if(Action.equals("created"))
 							NewWord = "new ";
+						else if(Action.equals("deleted"))
+							MilestoneURL = RepositoryURL + "/milestones";
 						message = "[" + Milestoner + "](" + ServerURL + Milestoner + ") has " + Action + " a " + NewWord + "milestone - [" + MilestoneName + "](" + MilestoneURL +")";
 					}
 					else if(Event.equals("Page Build"))
@@ -576,7 +605,7 @@ public class CliqInformer {
 						}
 						else if(Action.equals("deleted"))
 						{
-							message = "[" + Releaser + "](" + ServerURL + Releaser + ") has deleted a release [" + ReleaseName + " " + ReleaseTagName + "](" + ReleaseURL + ")";
+							message = "[" + Releaser + "](" + ServerURL + Releaser + ") has deleted a release " + ReleaseName + " " + ReleaseTagName ;
 						}
 						message = message + " \\n" + ReleaseURL;
 					}
@@ -627,8 +656,72 @@ public class CliqInformer {
 				{
 					message = message.replace("(me)","[" + Actor + "](" + ActorURL + ")");
 					message = message.replace("(repo)","[" + Repository + "](" + RepositoryURL + ")" );
+					if(Event.equals("Create") || Event.equals("Delete"))
+						Event = Event + "d";
 					message = message.replace("(event)","*" + Event + "*");
 					message = message.replace("(action)",Action);
+					message = message.replace("(ref)",(String) System.getenv("GITHUB_REF_TYPE") + " " + System.getenv("GITHUB_REF_NAME"));
+					message = message.replace("(workflow)",(String) System.getenv("GITHUB_WORKFLOW"));
+					if(System.getenv("BRANCH_RULE") != null)
+						message = message.replace("(rule)",(String) System.getenv("BRANCH_RULE"));
+					else
+						message = message.replace("(rule)","");
+					if(System.getenv("LABEL_NAME") != null)
+						message = message.replace("(label)",(String) System.getenv("LABEL_NAME"));
+					if(System.getenv("MILESTONE") != null)
+						message = message.replace("(milestone)",(String) System.getenv("MILESTONE"));
+					else
+						message = message.replace("(milestone)","");
+					if(System.getenv("RELEASE_NAME") != null)
+						message = message.replace("(release)",(String) System.getenv("RELEASE_NAME"));
+					else
+						message = message.replace("(release)","");
+					if(System.getenv("REGISTRY_PACKAGE_NAME") != null)
+						message = message.replace("(package)",(String) System.getenv("REGISTRY_PACKAGE_NAME"));
+					else
+						message = message.replace("(package)","");
+					if(System.getenv("PULL_REQUEST_TITLE") != null)
+						message = message.replace("(pull)",(String) System.getenv("PULL_REQUEST_TITLE"));
+					if(System.getenv("ISSUE_TITLE") != null && Event.equals("issue_comment") && ((String)System.getenv("ISSUE_TYPE")).equals("PULL_REQUEST"))
+						message = message.replace("(pull)",(String) System.getenv("ISSUE_TITLE"));
+					else
+						message = message.replace("(pull)","");
+					if(System.getenv("ISSUE_TITLE") != null)
+						message	= message.replace("(issue)",(String) System.getenv("ISSUE_TITLE"));
+					else
+						message = message.replace("(issue)","");
+					if(System.getenv("CHECK_RUN_NAME") != null)
+						message = message.replace("(run)",(String) System.getenv("CHECK_RUN_NAME"));
+					else
+						message = message.replace("(run)","");
+					if(System.getenv("DEPLOYMENT_ENV") != null)
+						message = message.replace("(deployment)",(String) System.getenv("DEPLOYMENT_ENV"));
+					else
+						message = message.replace("(deployment)","");
+					if(System.getenv("STATUS") != null)
+						message = message.replace("(status)",(String) System.getenv("STATUS"));
+					else
+						message = message.replace("(status)","");
+					if(System.getenv("BRANCH_NAME") != null)
+						message = message.replace("(branch)", (String) System.getenv("BRANCH_TYPE") + " " + System.getenv("BRANCH_NAME"));
+					else
+						message = message.replace("(branch)","");
+					if(System.getenv("DISCUSSION") != null)
+						message = message.replace("(discussion)",(String) System.getenv("DISCUSSION"));
+					else
+						message = message.replace("(discussion)","");
+					if(System.getenv("CATEGORY_NAME") != null)
+						message = message.replace("(category)", (String) System.getenv("CATEGORY_NAME"));
+					else
+						message = message.replace("(category)","");
+					if(System.getenv("ASSIGNED_USER") != null)
+						message = message.replace("(assignee)", (String) System.getenv("ASSIGNED_USER"));
+					else
+						message = message.replace("(assignee)","");
+					if(System.getenv("ASSIGNED_LABEL") != null)
+						message = message.replace("(label)", (String) System.getenv("ASSIGNED_LABEL"));
+					else
+						message = message.replace("(label)","");
 				}
 				System.out.println(message);
 				ArrayList<String> messages = new ArrayList<String>();
@@ -796,4 +889,46 @@ public class CliqInformer {
 		Files.write(file, lines, UTF_8 , CREATE , APPEND , WRITE);
 		System.out.println("Message - Status : " + Status);
 	}
+	
+	//to Split JSON for Single Line Key Value Pairs
+    public static String[] LineBreaker(String Line)
+    { 
+        Boolean isBetweenQuotes = false;
+        Integer count = 0;
+        Integer startindex = 0;
+        Character prec = '_';
+        Integer len = 0;
+        String key = new String();
+        String value = new String();
+        for (Character c : Line.toCharArray())
+        {
+            if(prec != '\\' && c == '"')
+            {
+                isBetweenQuotes = !isBetweenQuotes;
+                if(isBetweenQuotes)
+                    startindex = len;
+                else
+                {
+                    if(count % 4 == 0)
+                    {
+                        key = Line.substring(startindex+1,len);
+                    }
+                    else if(count % 4 == 1)
+                    {
+                        value = Line.substring(startindex+1,len);
+                    }
+                    count++;
+                }
+            }
+            prec = c;
+            len++;
+        }
+        String[] Array = new String[2];
+        if(key != "" && value != "")
+        {
+            Array[0] = key;
+            Array[1] = value;
+        }
+        return Array;
+    }
 }
